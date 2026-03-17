@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.9.0/fonts/remixicon.css"
+    rel="stylesheet"
+    />
+    <title>Notes</title>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>
+                my
+                <span>notes</span>
+            </h1>
+            <small>YOUR PERSONEL NOTEPAD</small>
+            <div class="nav">
+                <input type="text" class="searchBar" placeholder="Search notes...">
+                <button>+ New Note</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="count-div">
+            <span>0</span>
+            notes 
+        </div>
+
+        <div class="empty-notes-display">
+            <p>📋</p>
+            <h1>No notes yet</h1>
+            <p>Hit "New Note" to capture your first thought.</p>
+        </div>
+
+        <div class="notes-container">
+            
+        </div>
+
+        <div class="modal-container">
+            <h2>New Note</h2>
+            <div class="field">
+                <label for="inputTitle">TITLE</label>
+                <input id="inputTitle" type="text" placeholder="Give it a name" maxlength="30">
+            </div>
+            <div class="field">
+                <label for="inputContent">CONTENT</label>
+                <input id="inputContent" type="text" placeholder="Write something..." maxlength="100">
+            </div>
+            <div class="modal-buttons">
+                <button>Cancel</button>
+                <button id="save">Save</button>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
