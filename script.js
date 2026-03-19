@@ -3,7 +3,8 @@ let inputTitle = document.querySelector("#inputTitle");
 let inputContent = document.querySelector("#inputContent");
 let notesContainer = document.querySelector(".notes-container");
 let searchBar = document.querySelector(".searchBar");
-
+let noteCounter = document.querySelector("#noteCounter");
+let timestamp = document.querySelector(".timestamp");
 
 let notes = [];
 let editIndex = null;
@@ -57,7 +58,7 @@ function renderNotes(filteredNotes = notes){
         `
             <h2>${note.title}</h2>
             <p>${note.content}</p>
-            <div class="timestamp">Created just now</div>
+            <div class="timestamp"> <i class="ri-time-line"></i>${timestampFunc(note)}</div>
             <div class="icons">
             <button class="edit"><i class="ri-edit-box-line "></i>Edit</button>
             <button class="deletebtn"><i class="ri-delete-bin-line"></i>Delete</button>
@@ -65,6 +66,7 @@ function renderNotes(filteredNotes = notes){
         `
         notesContainer.append(notesDiv);
     })
+    counterFunc();
 }
 
 notesContainer.addEventListener("click", (e)=>{
@@ -107,6 +109,27 @@ searchBar.addEventListener("input", ()=>{
     let searchWord = searchBar.value;
     filtering(searchWord);
 })
+
+
+function counterFunc(){
+    noteCounter.textContent = notes.length;
+}
+
+function timestampFunc(note){
+    let createTime = (Date.now() - note.createdAt)/60000;
+    let updateTime = (Date.now() - note.updatedAt)/60000;
+
+    if(createTime === updateTime) return `Created ${formatTime(createTime)}`;
+    else return `Edited ${formatTime(updateTime)}`
+
+}
+
+function formatTime(time){
+     if(time<1) return `just now`;
+     else if(time<60)return `${Math.floor(time)}m ago`;
+     else if(time<1440)return `${Math.floor(time/60)}h ago`;
+     else return `${Math.floor(time/24)}d ago`;
+}
 
 
 function loadnotes(){
