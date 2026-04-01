@@ -5,6 +5,11 @@ let notesContainer = document.querySelector(".notes-container");
 let searchBar = document.querySelector(".searchBar");
 let noteCounter = document.querySelector("#noteCounter");
 let timestamp = document.querySelector(".timestamp");
+let emptyNotesDisplay = document.querySelector(".empty-notes-display");
+let cancel = document.querySelector("#cancel");
+let modelOverlay = document.querySelector(".modal-overlay");
+let newNote = document.querySelector("#newNote");
+let headingAlt = document.querySelector(".modal-container h2");
 
 let notes = [];
 let editIndex = null;
@@ -34,13 +39,29 @@ save.addEventListener("click", ()=>{
         renderNotes();
         inputTitle.value = "";
         inputContent.value = "";
+        modelHidden();
+        headingAlt.textContent = "New Note";
         editIndex = null;
     }else{
+
     const title = inputTitle.value;
     const content = inputContent.value;
+
+    if(title.trim() === "" && content.trim()===""){
+        inputTitle.classList.add("empty-field");
+        inputContent.classList.add("empty-field");
+        setTimeout(()=>{
+            inputTitle.classList.remove("empty-field");
+            inputContent.classList.remove("empty-field");
+        },100);
+        inputTitle.focus();
+        return;
+    }
+
     saveNote(title,content);
     inputTitle.value = "";
     inputContent.value = "";
+    modelHidden();
     renderNotes();
     }
 }) 
@@ -89,6 +110,8 @@ function iconIndex(e){
 }
 
 function editFunc(e){
+    modelShow();
+    headingAlt.textContent = "Edit Note";
     editIndex = iconIndex(e);
     let editParent = e.target.closest(".notes");
     let h2Edit = notes[editIndex].title;
@@ -113,6 +136,8 @@ searchBar.addEventListener("input", ()=>{
 
 function counterFunc(){
     noteCounter.textContent = notes.length;
+    if(notes.length>0) emptyNotesDisplay.classList.add("display");
+    else emptyNotesDisplay.classList.remove("display");
 }
 
 function timestampFunc(note){
@@ -131,6 +156,29 @@ function formatTime(time){
      else return `${Math.floor(time/24)}d ago`;
 }
 
+cancel.addEventListener("click", ()=>{
+    modelHidden();
+})
+
+function modelHidden(){
+    modelOverlay.style.display = "none";
+}
+
+function modelShow(){
+    modelOverlay.style.display = "flex";
+}
+
+newNote.addEventListener("click", ()=>{
+    inputTitle.value = "";
+    inputContent.value = "";
+    modelShow();
+    inputTitle.focus();
+})
+
+
+
+
+
 
 function loadnotes(){
     if(localStorage.getItem("notes") === null) return;
@@ -139,3 +187,6 @@ function loadnotes(){
 }
 
 loadnotes();
+
+
+

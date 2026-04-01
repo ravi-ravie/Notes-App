@@ -13,14 +13,16 @@
 <body>
     <header>
         <div class="header-container">
+            <div class="left-nav">
             <h1>
-                my
-                <span>notes</span>
+                my<span>notes</span>
             </h1>
             <small>YOUR PERSONEL NOTEPAD</small>
+            </div>
             <div class="nav">
+                <i class="ri-search-line searchIcon"></i>
                 <input type="text" class="searchBar" placeholder="Search notes...">
-                <button>+ New Note</button>
+                <button id="newNote">+ New Note</button>
             </div>
         </div>
     </header>
@@ -28,35 +30,37 @@
     <main>
         <div class="count-div">
             <span id="noteCounter">0</span>
-            notes 
+            Notes 
         </div>
 
         <div class="empty-notes-display">
-            <p>📋</p>
+            <p id="noteEmoji">📋</p>
             <h1>No notes yet</h1>
-            <p>Hit "New Note" to capture your first thought.</p>
+            <p id="empty-notes-subtitle">Hit "New Note" to capture your first thought.</p>
         </div>
 
         <div class="notes-container">
             
         </div>
 
+    </main>
+    <div class="modal-overlay">
         <div class="modal-container">
-            <h2>New Note</h2>
-            <div class="field">
-                <label for="inputTitle">TITLE</label>
-                <input id="inputTitle" type="text" placeholder="Give it a name" maxlength="30">
-            </div>
-            <div class="field">
-                <label for="inputContent">CONTENT</label>
-                <input id="inputContent" type="text" placeholder="Write something..." maxlength="100">
-            </div>
-            <div class="modal-buttons">
-                <button>Cancel</button>
-                <button id="save">Save</button>
+                <h2>New Note</h2>
+                <div class="field">
+                    <label for="inputTitle">TITLE</label>
+                    <input id="inputTitle" type="text" placeholder="Give it a name" maxlength="50">
+                </div>
+                <div class="field">
+                    <label for="inputContent">CONTENT</label>
+                    <textarea id="inputContent" placeholder="Write something..."></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button id="cancel">Cancel</button>
+                    <button id="save">Save</button>
+                </div>
             </div>
         </div>
-    </main>
     <script src="script.js"></script>
 </body>
 </html>
